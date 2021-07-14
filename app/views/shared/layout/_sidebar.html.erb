@@ -35,9 +35,11 @@
               <p>
                 <%= agenda.title %>
                 <i class="right fa fa-angle-left"></i>
+                <i></i>
               </p>
             </a>
             <ul class="nav nav-treeview" style="display: block;">
+              <li class="nav-item"><%= link_to "Delete", agenda_path(agenda), method: "delete", data:{ confirm: "Are you sure ?"}, class:"right nav-link bg-danger"%></li>
               <% agenda.articles.each do |article| %>
                 <li class="nav-item">
                   <%= link_to article_path(article), class: 'nav-link' do %>

@@ -249,6 +249,7 @@ en:
       team_build2: 'Create Team'
       select_team: 'Select Team'
       create_agenda: 'Create Agenda'
+      delete_agenda: 'Agenda deleted'
       input_agenda_title: 'Input title'
       input_team_name: 'Input a team name'
       recent_posts: 'Recent Posts'
