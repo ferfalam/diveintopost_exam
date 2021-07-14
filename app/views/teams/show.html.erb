@@ -11,24 +11,6 @@
               <%= @team.name %>
             </div>
             <%= link_to I18n.t('views.messages.edit_team'), edit_team_path(@team), class: 'btn btn-success btn-block mt-3' %>
-            
-            <% if current_user == @team.owner %>
-              <%= form_with( local: true, url:transfer_authority_path ) do |f| %>
-                <input type="hidden" name="authority[team_id]" value="<%=@team.id%>">
-                <div class="form-group">
-                  <select name="authority[to]" id="authority_to" class="form-control mt-4">
-                    <% @team.assigns.each do |assign| %>
-                      <% unless assign.user == current_user %>
-                        <option value="<%=assign.user.id %>"><%= assign.user.email%> </option>
-                      <% end %>
-                    <% end %>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <%= f.submit I18n.t('views.messages.transfer_authority'), class:"form-control mt-1"%>
-                </div>
-              <% end %>  
-            <% end %>
           </div>
 
           <div class="col-md-8">
@@ -60,6 +42,11 @@
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
                       <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+                      
+                      <% if current_user == @team.owner && assign.user != @team.owner %>
+                        <td><%= link_to  I18n.t('views.messages.transfer_authority'), transfer_authority_path(@team, assign), class:"btn btn-sm btn-primary" %></td>
+                      <% end %>
+                      
                     </tr>
                   <% end %>
                 </tbody>

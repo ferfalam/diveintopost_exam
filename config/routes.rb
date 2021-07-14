@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'statics#top'
   get :dashboard, to: 'teams#dashboard'
-  post :transfer_authority, to: "teams#transfer_authority"
+  get "transfer_authority/:team/:to", to: "teams#transfer_authority", as: "transfer_authority"
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
