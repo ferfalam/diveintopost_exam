@@ -256,6 +256,8 @@ en:
       team_members: 'Team Members'
       team_members2: 'Team Members'
       edit_team: 'Edit Team'
+      transfer_authority: 'Transfer Authority'
+      complete_transfer_authority: 'Complete Transfer Authority'
       invite_team_member: 'Invite a team member'
       team_leader: 'Team Leader'
       leader: 'Leader'

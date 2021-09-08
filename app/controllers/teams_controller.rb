@@ -15,7 +15,11 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  def edit; end
+  def edit
+    unless current_user == @team.owner
+      redirect_to team_url(params[:id]), notice: "You are not authorized to do this action"
+    end
+  end
 
   def create
     @team = Team.new(team_params)
@@ -46,6 +50,16 @@ class TeamsController < ApplicationController
   def dashboard
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
+
+  def transfer_authority
+    @team = Team.friendly.find(params[:team])
+    last_leader = @team.owner.email
+    @team.owner_id = params[:to]
+    @team.save()
+    LeaderChangeMailer.authority_change(@team.owner.email, last_leader).deliver
+    redirect_to @team, notice:"You successfully change the team leader"
+  end
+  
 
   private
 
