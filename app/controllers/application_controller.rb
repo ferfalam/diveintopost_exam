@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
+  
   def set_working_team
     @working_team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : Team.first
   end
